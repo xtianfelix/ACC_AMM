@@ -1,0 +1,25 @@
+.report{
+	width: 750px;
+	height: auto;
+	font-family: Calibri;
+	color: black;
+	border: 1px solid;
+	background: white;
+	margin-top: 10px;
+	margin-left: 3px;	
+}
+
+table{
+	width: 95%;	
+	vertical-align: middle;
+	text-align: center;
+	position: relative;
+	margin: 0 auto;
+}
+
+td{
+	border: 1px solid;
+	padding: 0px;
+	white-space: 0;
+	border-spacing: 0;
+}

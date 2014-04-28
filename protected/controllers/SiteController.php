@@ -62,9 +62,8 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$blmCairRows = Penjualan::model()->blmCair()->findAll();
-		$stockRows = Stock::model()->available()->findAll();
-		$this->render('index',array('blmCairRows'=>$blmCairRows,'stockRows'=>$stockRows));
+		$transactionRows = Transaction::model()->findAll();
+		$this->render('index',array('transactionRows'=>$transactionRows,));
 	}
 
 	/**

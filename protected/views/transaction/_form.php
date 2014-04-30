@@ -20,14 +20,9 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-		<?php echo $form->error($model,'id'); ?>
-	</div>
-
-	<div class="row">
+		<?php $accountList=CHtml::listData(Account::model()->findAll(), 'id', 'account'); ?>
 		<?php echo $form->labelEx($model,'account_id'); ?>
-		<?php echo $form->textField($model,'account_id'); ?>
+		<?php echo $form->dropDownList($model,'account_id', $accountList, array(/*'class'=>'input-xlarge'*/)); ?>
 		<?php echo $form->error($model,'account_id'); ?>
 	</div>
 
@@ -50,14 +45,15 @@
 	</div>
 
 	<div class="row">
+		<?php $kasList=CHtml::listData(Kas::model()->findAll(), 'id', 'kas'); ?>
 		<?php echo $form->labelEx($model,'kas_id'); ?>
-		<?php echo $form->textField($model,'kas_id'); ?>
+		<?php echo $form->dropDownList($model,'kas_id', $kasList, array(/*'class'=>'input-xlarge'*/)); ?>
 		<?php echo $form->error($model,'kas_id'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'nama_id'); ?>
-		<?php echo $form->textField($model,'nama_id'); ?>
+		<?php $namaList=CHtml::listData(Nama::model()->findAll(), 'id', 'nama'); ?>
+		<?php echo $form->labelEx($model,'nama_id'); ?><?php echo $form->dropDownList($model,'kas_id', $namaList, array(/*'class'=>'input-xlarge'*/)); ?>
 		<?php echo $form->error($model,'nama_id'); ?>
 	</div>
 
@@ -66,12 +62,12 @@
 		<?php echo $form->textField($model,'bln_jl'); ?>
 		<?php echo $form->error($model,'bln_jl'); ?>
 	</div>
-
+<!-- 
 	<div class="row">
 		<?php echo $form->labelEx($model,'unit'); ?>
 		<?php echo $form->textField($model,'unit'); ?>
 		<?php echo $form->error($model,'unit'); ?>
-	</div>
+	</div> -->
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'lunas_id'); ?>
@@ -89,12 +85,6 @@
 		<?php echo $form->labelEx($model,'num'); ?>
 		<?php echo $form->textField($model,'num'); ?>
 		<?php echo $form->error($model,'num'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'is_debet'); ?>
-		<?php echo $form->textField($model,'is_debet'); ?>
-		<?php echo $form->error($model,'is_debet'); ?>
 	</div>
 
 	<div class="row buttons">

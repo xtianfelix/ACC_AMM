@@ -6,8 +6,8 @@
  * The followings are the available columns in table 'transaction':
  * @property double $id
  * @property double $account_id
- * @property double $tgl
- * @property double $tgl_pb
+ * @property date $tgl
+ * @property date $tgl_pb
  * @property string $description
  * @property double $kas_id
  * @property double $nama_id
@@ -16,7 +16,6 @@
  * @property double $lunas_id
  * @property double $code_id
  * @property double $num
- * @property double $is_debet
  *
  * The followings are the available model relations:
  * @property Nama $nama
@@ -43,11 +42,11 @@ class Transaction extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, account_id, tgl, tgl_pb, kas_id, nama_id, bln_jl, unit, lunas_id, code_id, num, is_debet', 'numerical'),
+			array('id, account_id, tgl, tgl_pb, kas_id, nama_id, bln_jl, unit, lunas_id, code_id, num', 'numerical'),
 			array('description', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, account_id, tgl, tgl_pb, description, kas_id, nama_id, bln_jl, unit, lunas_id, code_id, num, is_debet', 'safe', 'on'=>'search'),
+			array('id, account_id, tgl, tgl_pb, description, kas_id, nama_id, bln_jl, unit, lunas_id, code_id, num', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -85,7 +84,6 @@ class Transaction extends ActiveRecord
 			'lunas_id' => 'Lunas',
 			'code_id' => 'Code',
 			'num' => 'Num',
-			'is_debet' => 'Is Debet',
 		);
 	}
 
@@ -119,7 +117,6 @@ class Transaction extends ActiveRecord
 		$criteria->compare('lunas_id',$this->lunas_id);
 		$criteria->compare('code_id',$this->code_id);
 		$criteria->compare('num',$this->num);
-		$criteria->compare('is_debet',$this->is_debet);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

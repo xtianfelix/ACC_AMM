@@ -24,4 +24,14 @@ $this->menu=array(
 		'id',
 		'account',
 	),
-)); ?>
+)); 
+echo "<div class='table-responsive'><table class='table table-condensed table-hover'>";
+	foreach ($model->transactions[0]->attributeLabels() as $label) {
+		echo "<th>$label</th>";
+	}
+foreach ($model->transactions as $key => $value) {
+	$this->renderPartial('/transaction/_row', array('data'=>$value));
+}
+echo "</table></div>";
+
+?>

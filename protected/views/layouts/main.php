@@ -80,12 +80,12 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 						<li id="report" <?php echo strpos(Yii::app()->urlManager->parseUrl(Yii::app()->request),'report')!==false?"class='active'":""; ?>>
 							<a href="<?php echo $this->createUrl('/report'); ?>">Report</a>
 						</li>
-		    			<?php if($this->loggedInUser()){ ?>
+		    			<?php /*if($this->loggedInUser()){ ?>
 							<li class="divider-vertical"></li>
 							<li id="logout">
 								<a href="<?php echo $this->createUrl('/site/logout'); ?>">Logout</a>
 							</li>
-		   				<?php } ?>
+		   				<?php }*/ ?>
 		            </ul>
 		            <!--ul class="nav pull-right">
 		            	<a class="brand" href="#">Bootstrap</a>

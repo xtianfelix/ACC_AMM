@@ -20,6 +20,8 @@ return array(
 		'application.models.*',
 		'application.models.db.*',
 		'application.components.*',
+  		'application.modules.user.models.*',
+  		'application.modules.user.components.*',
 	),
 
 	'modules'=>array(
@@ -31,6 +33,40 @@ return array(
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
+	    
+		'user' => array(
+		'debug' => false,
+		'usersTable' => 'users',
+		'translationTable' => 'translation',
+		),
+		'usergroup' => array(
+		'usergroupTable' => 'user_group',
+		'usergroupMessagesTable' => 'user_group_message',
+		),
+		'membership' => array(
+		'membershipTable' => 'membership',
+		'paymentTable' => 'payment',
+		),
+		'friendship' => array(
+		'friendshipTable' => 'friendship',
+		),
+		'profile' => array(
+		'privacySettingTable' => 'privacy_setting',
+		'profileFieldsGroupTable' => 'profile_field_group',
+		'profileFieldsTable' => 'profile_field',
+		'profileTable' => 'profile',
+		'profileCommentTable' => 'profile_comment',
+		'profileVisitTable' => 'profile_visit',
+		),
+		'role' => array(
+		'rolesTable' => 'role',
+		'userHasRoleTable' => 'user_role',
+		'actionTable' => 'action',
+		'permissionTable' => 'permission',
+		),
+		'messages' => array(
+		'messagesTable' => 'message',
+		),
 		
 	),
 
@@ -38,11 +74,14 @@ return array(
 	'components'=>array(
 		'user'=>array(
 			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
+		    'class' => 'application.modules.user.components.YumWebUser',
+		    'allowAutoLogin'=>true,
+		    'loginUrl' => array('//user/user/login'),
 		),
+        'cache' => array('class' => 'system.caching.CDummyCache'),
 		// uncomment the following to enable URLs in path-format
 		
-		'urlManager'=>array(
+	/*	'urlManager'=>array(
 			'urlFormat'=>'path',
 			'appendParams' => FALSE,
 			'showScriptName' => FALSE,
@@ -52,7 +91,7 @@ return array(
 				'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 			),
 		),
-	/*	'db'=>array(
+		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),*/
 		

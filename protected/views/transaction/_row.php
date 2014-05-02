@@ -15,6 +15,6 @@
 		echo "<td>".$data->unit."</td>";
 		echo "<td>".(is_object($data->lunas)?$data->lunas->lunas:"")."</td>";
 		echo "<td>".$data->code_id."</td>";
-		echo "<td>".($data->num>0?$data->num."</td><td>":"</td><td>".-$data->num)."</td>";
+		echo "<td><div class='text-right'>". ($data->num>0?number_format($data->num,2,".",",")."</div></td><td><div class='text-right'>":"</div></td><td><div class='text-right'>".number_format(-$data->num,2,".",",")) ."</div></td>";
 	echo "</tr>";
 ?>

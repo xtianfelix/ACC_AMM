@@ -265,6 +265,14 @@ div.search-form
 			text-align:right !important;
 		}
 
+th{
+	cursor:pointer;
+}
+td {
+    line-height: 25px;
+    min-height: 25px;
+    height: 25px;
+}
 
 
 @media only screen 

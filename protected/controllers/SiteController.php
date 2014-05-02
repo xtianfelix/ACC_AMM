@@ -2,7 +2,6 @@
 
 class SiteController extends Controller
 {
-
 	/**
 	 * @return array action filters
 	 */
@@ -62,8 +61,21 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		print_r(Yii::app()->user->data());
-		//$this->render('index',array('transactionRows'=>$transactionRows,));
+		$transactionRows=null;
+		if(Yii::app()->user->data()->username=="vita"){
+			$transactionRows=Transaction::model()->findAll(array(
+				'order'=>'id DESC',
+				'limit'=>'50',
+				'condition'=>'kas_id=:kas_id',
+				'params'=>array(':kas_id'=>'1')
+			));
+		}else{
+			$transactionRows=Transaction::model()->findAll(array(
+				'order'=>'id DESC',
+				'limit'=>'50',
+			));
+		}
+		$this->render('index',array('transactionRows'=>$transactionRows,));
 	}
 
 	/**

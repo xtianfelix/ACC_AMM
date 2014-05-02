@@ -5,69 +5,49 @@ $this->pageTitle=Yii::app()->name;
 ?>
 <div class="tabbable"> <!-- Only required for left/right tabs -->
   <ul class="nav nav-tabs">
-    <li class="active"><a href="#tab1" data-toggle="tab">Belum Cair</a></li>
-    <li><a href="#tab2" data-toggle="tab">Stock</a></li>
+    <li class="active"><a href="#tab1" data-toggle="tab">Transaksi terakhir</a></li>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="tab1"> <!-- tab pane 1 -->
 		<div style="overflow:auto;"> <!-- div overflow -->
-			<table class="table table-hover" style="width:1800px;">
-				<?php
-				$sum=0;
-				 ?>
-				<thead>
-					<tr>
-						<th>Tanggal</th>
-						<th>Interval</th>
-						<th>Leasing</th>
-						<th>Nama</th>
-						<th>Alamat</th>
-						<th>Merk</th>
-						<th>Type</th>
-						<th>Tahun</th>
-						<th>Warna</th>
-						<th>OTR</th>
-						<th>Cashback</th>
-						<th>TDP</th>
-						<th>BR.BK.</th>
-						<th>Showroom</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php foreach($blmCairRows as $value){
-						$date1 = new DateTime($value->TANGGAL_TERJUAL);
-						$date2 = new DateTime();
-						$interval = $date1->diff($date2);
-						$class="";
-						if($interval->days>20)
-							$class="warning";
-						if($interval->days>30)
-							$class="error";
-
+			<div id="of_table" style="width:1980px;margin:0px auto;">
+				<table class="table table-hover" style="width:auto;">
+					<?php
+					$sum=0;
 					 ?>
-					<tr class="<?php echo $class; ?>">
-						<td><?php echo $value->TANGGAL_TERJUAL; ?></td>
-						<td><?php echo $interval->days; ?></td>
-						<td><?php echo $value->NAMA_LEASING; ?></td>
-						<td><?php echo $value->customer->name; ?></td>
-						<td><?php echo $value->customer->address; ?></td>
-						<td><?php echo $value->stock->MERK; ?></td>
-						<td><?php echo $value->stock->TYPE; ?></td>
-						<td><?php echo $value->stock->TAHUN; ?></td>
-						<td><?php echo $value->stock->WARNA; ?></td>
-						<td class="text-right"><?php echo number_format($value->HARGA_OTR, 2, '.', ','); ?></td>
-						<td class="text-right"><?php echo number_format($value->CASHBACK, 2, '.', ','); ?></td>
-						<td class="text-right"><?php echo number_format($value->TOTAL_UANG_MUKA, 2, '.', ','); ?></td>
-						<td><?php echo $value->stock->LELANG_BEKAS_BARU==1?"BARU":"BEKAS"; ?></td>
-						<td><?php echo $value->location->location; ?></td>
+					<thead>
+						<tr><?php
+							foreach ($transactionRows[0]->attributeLabels() as $label) {
+								echo "<th>$label</th>";
+							} ?>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach($transactionRows as $value){/*
+							$date1 = new DateTime($value->TANGGAL_TERJUAL);
+							$date2 = new DateTime();
+							$interval = $date1->diff($date2);
+							$class="";
+							if($interval->days>20)
+								$class="warning";
+							if($interval->days>30)
+								$class="error";
+	*/
+								$this->renderPartial('/transaction/_row', array('data'=>$value));
+						 ?>
 						
-					</tr>
-					<?php } ?>
-				</tbody>
-			</table>
+						<?php } ?>
+					</tbody>
+				</table>
+			</div>
 		</div><!-- div overflow end -->
     </div><!-- tab pane 1 end -->
   </div>
+  <script type="text/javascript">
+ 	$(document).ready( function() {
+  		$('#of_table').css('width',$('#of_table table').css('width'));
+ 	});
+  </script>
 </div>
 
 <style type="text/css">

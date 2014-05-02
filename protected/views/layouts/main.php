@@ -10,7 +10,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-        <meta charset="utf-8">
+    <meta charset="utf-8">
 	<meta name="language" content="en" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         
@@ -36,64 +36,22 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
 <body>
 
+<div class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<?php echo $this->createUrl('/site/index'); ?>">Accounting</a>
+    </div><!-- navbar header -->
+
+  </div><!-- container fluid -->
+</div><!-- /navbar -->
 <div class="container" id="page">
-	<div class="navbar navbar-fixed-top">
-	  	<div class="navbar-inner">
-			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</a>
-				<div class="nav-collapse collapse">
-		            <ul class="nav">
-						<li id="home" <?php echo Yii::app()->urlManager->parseUrl(Yii::app()->request)==""?"class='active'":""; ?>>
-							<a href="<?php echo $this->createUrl('/site/index'); ?>">Home</a>
-						</li>
-						<li class="divider-vertical"></li>
-						<li class="dropdown">
-						    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						      Penjualan
-						      <b class="caret"></b>
-						    </a>
-						    <ul class="dropdown-menu">
-						        <li><a href="<?php echo $this->createUrl('/penjualan/create'); ?>">Tambah</a></li>
-						        <li><a href="<?php echo $this->createUrl('/penjualan/admin'); ?>">Administrasi</a></li>
-						    </ul>
-					  	</li>
-						<li class="divider-vertical"></li>
-						<li class="dropdown">
-						    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						      Pembelian
-						      <b class="caret"></b>
-						    </a>
-						    <ul class="dropdown-menu">
-						        <li><a href="<?php echo $this->createUrl('/stock/create'); ?>">Tambah</a></li>
-						        <li><a href="<?php echo $this->createUrl('/stock/select'); ?>">Daftar</a></li>
-						    </ul>
-					  	</li>
-						<li class="divider-vertical"></li>
-						<li id="maintenance" <?php echo strpos(Yii::app()->urlManager->parseUrl(Yii::app()->request),'maintenance')!==false?"class='active'":""; ?>>
-							<a href="<?php echo $this->createUrl('/maintenance/create'); ?>">Maintenance</a>
-						</li>
-						<li class="divider-vertical"></li>
-						<li id="report" <?php echo strpos(Yii::app()->urlManager->parseUrl(Yii::app()->request),'report')!==false?"class='active'":""; ?>>
-							<a href="<?php echo $this->createUrl('/report'); ?>">Report</a>
-						</li>
-		    			<?php /*if($this->loggedInUser()){ ?>
-							<li class="divider-vertical"></li>
-							<li id="logout">
-								<a href="<?php echo $this->createUrl('/site/logout'); ?>">Logout</a>
-							</li>
-		   				<?php }*/ ?>
-		            </ul>
-		            <!--ul class="nav pull-right">
-		            	<a class="brand" href="#">Bootstrap</a>
-		            </ul-->
-				</div><!-- /.nav-collapse -->
-			</div><!-- /container -->
-		</div><!-- /navbar-inner -->
-	</div><!-- /navbar -->
 	<!--div id="header">
 		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
 	</div--><!-- header -->

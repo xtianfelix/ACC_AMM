@@ -10,7 +10,7 @@ include getcwd().'/../mainconfig.php';
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	//'defaultController' => 'root',	//	RootController
-	'name'=>'My Web Application',
+	'name'=>'Abadi ACCOUNTING',
 
 	// preloading 'log' component
 	'preload'=>array('log'),

@@ -26,6 +26,7 @@
  */
 class Transaction extends ActiveRecord
 {
+	public $kredit;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -83,7 +84,8 @@ class Transaction extends ActiveRecord
 			'unit' => 'Unit',
 			'lunas_id' => 'Lunas',
 			'code_id' => 'Code',
-			'num' => 'Num',
+			'num' => 'Debet',
+			'kredit' => 'Kredit',
 		);
 	}
 

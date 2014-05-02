@@ -4,7 +4,6 @@ class Controller extends CController
 {
 	private $needs_user = TRUE;
 	protected $loggedin_user = NULL;
-	public $layout='column1';
 	public $menu=array();
 	public $breadcrumbs=array();
 	
@@ -40,9 +39,9 @@ class Controller extends CController
 		{
 			//	Pick the most appropriate layout for this user
 			if($this->loggedInUser())
-				$this->layout = 'identified';
+				$this->layout = 'column1';
 			else
-				$this->layout = 'anonymous';
+				$this->layout = 'column2';
 		}
 		
 		return parent::beforeRender($view);

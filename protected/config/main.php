@@ -81,7 +81,7 @@ return array(
         'cache' => array('class' => 'system.caching.CDummyCache'),
 		// uncomment the following to enable URLs in path-format
 		
-	/*	'urlManager'=>array(
+		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'appendParams' => FALSE,
 			'showScriptName' => FALSE,
@@ -89,15 +89,16 @@ return array(
 				'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
 				'<controller:\w+>/<action:\w+>/<subaction:\w+>' => '<controller>/<action>',
 				'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+				'module/<module:\w+>/<controller:\w+>/<action:\w+>'=>'<module>/<controller>/<action>',
 			),
 		),
-		'db'=>array(
+	/*	'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),*/
 		
 		// uncomment the following to use a MySQL database
 		
-		'db'=>$db_conn,
+		'db'=>$db_conn_acc,
 		
 		'request' => array
 		(

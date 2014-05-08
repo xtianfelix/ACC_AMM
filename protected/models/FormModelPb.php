@@ -7,6 +7,10 @@ class FormModelPb extends CFormModel
 	public $num;
 	public $to_account_id;
 	public $from_account_id;
+	public $to_kas_id;
+	public $from_kas_id;
+	public $code_id;
+	public $nama_id;
 
 	public function rules()
 	{
@@ -19,6 +23,10 @@ class FormModelPb extends CFormModel
 		$rules[] = array('num', 'safe');
 		$rules[] = array('to_account_id', 'safe');
 		$rules[] = array('from_account_id', 'safe');
+		$rules[] = array('to_kas_id', 'safe');
+		$rules[] = array('from_kas_id', 'safe');
+		$rules[] = array('code_id', 'safe');
+		$rules[] = array('nama_id', 'safe');
 		return $rules;
 	}
 
@@ -32,6 +40,14 @@ class FormModelPb extends CFormModel
 		$fromTransaction->num = -$this->num;
 		$toTransaction->account_id = $this->to_account_id;
 		$fromTransaction->account_id = $this->from_account_id;
+		$toTransaction->kas_id = $this->to_kas_id;
+		$fromTransaction->kas_id = $this->from_kas_id;
+		$toTransaction->nama_id = $this->nama_id;
+		$fromTransaction->nama_id = $this->nama_id;
+		$toTransaction->lunas_id = '1';
+		$fromTransaction->lunas_id = '1';
+		$toTransaction->code_id = $this->code_id;
+		$fromTransaction->code_id = $this->code_id;
 
 		if(($fromTransaction->save())&&($toTransaction->save())){
 			$controller->redirect(array('account/view','id'=>$this->to_account_id));

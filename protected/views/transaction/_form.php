@@ -20,7 +20,7 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php $accountList=CHtml::listData(Account::model()->findAll(), 'id', 'account'); ?>
+		<?php $accountList=CHtml::listData(Yii::app()->user->data()->userAccounts, 'account_id', 'account.account'); ?>
 		<?php echo $form->labelEx($model,'account_id'); ?>
 		<?php echo $form->dropDownList($model,'account_id', $accountList, array(/*'class'=>'input-xlarge'*/)); ?>
 		<?php echo $form->error($model,'account_id'); ?>
@@ -28,13 +28,13 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tgl'); ?>
-		<?php echo $form->textField($model,'tgl'); ?>
+		<?php echo $form->textField($model,'tgl',array(/*'class'=>'input-xlarge',*/'id'=>'dp1')); ?>
 		<?php echo $form->error($model,'tgl'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tgl_pb'); ?>
-		<?php echo $form->textField($model,'tgl_pb'); ?>
+		<?php echo $form->textField($model,'tgl_pb',array(/*'class'=>'input-xlarge',*/'id'=>'dp2')); ?>
 		<?php echo $form->error($model,'tgl_pb'); ?>
 	</div>
 
@@ -77,7 +77,8 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'code_id'); ?>
-		<?php echo $form->textField($model,'code_id'); ?>
+		<?php $codeList=CHtml::listData(Code::model()->findAll(), 'id', 'id'); ?>
+		<?php echo $form->dropDownList($model,'code_id', $codeList, array(/*'class'=>'input-xlarge'*/)); ?>
 		<?php echo $form->error($model,'code_id'); ?>
 	</div>
 
@@ -94,3 +95,37 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<script type="text/javascript">
+	var nowTemp = new Date();
+	var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+ 	$(document).ready( function() {
+
+    	$("#pop").popover();
+    	var dp1=$('#dp1').datepicker({
+			format: 'yyyy-mm-dd',
+			onRender: function(date) {
+			  return date.valueOf() < now.valueOf() ? 'disabled' : '';
+			}
+		}).on('changeDate', function(ev){
+			$('#dp1').datepicker('hide');
+			dp2.setValue(ev.date);
+		}).data('datepicker');
+		var dp2=$('#dp2').datepicker({
+			format: 'yyyy-mm-dd'
+		}).on('changeDate', function(ev){
+				$('#dp2').datepicker('hide');
+		}).data('datepicker');
+
+
+		dp1.setValue(nowTemp);
+		dp2.setValue(nowTemp);
+
+		$('#dp3').datepicker({
+			format: 'yyyy-mm-dd'
+		}).on('changeDate', function(ev){
+				$('#dp3').datepicker('hide');
+		});
+	}); 
+</script>

@@ -17,6 +17,7 @@
  * @property YumProfile $profile
  * @property array $roles array of YumRole
  * @property array $users array of YumUser
+ * @property UserAccount[] $userAccounts
  *
  * Scopes:
  * @property YumUser $active
@@ -354,6 +355,7 @@ class YumUser extends YumActiveRecord
 				'roles' => array(self::MANY_MANY, 'YumRole', Yum::module('role')->userHasRoleTable . '(user_id, role_id)'),
 				'memberships' => array(self::HAS_MANY, 'YumMembership', 'user_id'),
 				'privacy' => array(self::HAS_ONE, 'YumPrivacySetting', 'user_id'),
+				'userAccounts' => array(self::HAS_MANY, 'UserAccount', 'user_id'),
 				);
 	}
 

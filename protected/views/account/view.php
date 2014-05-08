@@ -29,9 +29,14 @@ echo "<div class='table-responsive'><table class='table table-condensed table-ho
 	foreach ($model->transactions[0]->attributeLabels() as $label) {
 		echo "<th>$label</th>";
 	}
-foreach ($model->transactions as $key => $value) {
-	$this->renderPartial('/transaction/_row', array('data'=>$value));
-}
+	$pageSize=50;
+	$i=0;
+	$count=count($model->transactions);
+	if($count>$pageSize)
+		$i=$count-$pageSize;
+	for ($i=$i;$i<$count;$i++) {
+		$this->renderPartial('/transaction/_row', array('data'=>$model->transactions[$i]));
+	}
 echo "</table></div>";
 
 ?>

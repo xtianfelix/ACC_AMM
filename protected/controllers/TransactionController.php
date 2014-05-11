@@ -26,16 +26,16 @@ class TransactionController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','pb'),
+				'actions'=>array('view','create','pb'),
 				'users'=>array('@'),
 			),
+			array('allow',
+				'actions'=>array('createWisata','calculator'),
+				'expression' => 'Yii::app()->user->can("transaction_createWisata")'
+				),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('update','index','admin','delete'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -77,6 +77,67 @@ class TransactionController extends Controller
 			'model'=>$model,
 		));
 	}
+
+	public function actionCalculator(){
+		$model=new Transaction;
+		$this->render('calculator',array(
+			'model'=>$model,));
+	}
+	
+	/**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 */
+	public function actionCreateWisata()
+	{
+		$model=new Transaction;
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Transaction']))
+		{
+			$model->attributes=$_POST['Transaction'];
+			$model->kas_id=3;
+			$model->lunas_id=2;
+			if(strpos($model->description,"TIKET KOLAM")!==FALSE){
+				$model->code_id=503;
+			}elseif(strpos($model->description,"TIKET MASUK")!==FALSE){
+				$model->code_id=301;
+			}elseif(strpos($model->description,"PENJUALAN LIA")!==FALSE){
+				$model->code_id=302;
+			}elseif(strpos($model->description,"BAN PELAMPUNG")!==FALSE){
+				$model->code_id=303;
+			}elseif(strpos($model->description,"BAJU,CELANA,KAOS")!==FALSE){
+				$model->code_id=304;
+			}elseif(strpos($model->description,"LAIN2")!==FALSE){
+				$model->code_id=305;
+			}elseif(strpos($model->description,"FANTA COCA COLA")!==FALSE){
+				$model->code_id=306;
+			}elseif(strpos($model->description,"ICE CREAM")!==FALSE){
+				$model->code_id=307;
+			}elseif(strpos($model->description,"SOSRO")!==FALSE){
+				$model->code_id=308;
+			}elseif(strpos($model->description,"TIKET PARKIR")!==FALSE){
+				$model->code_id=309;
+			}elseif(strpos($model->description,"HYDRO COCO")!==FALSE){
+				$model->code_id=310;
+			}elseif(strpos($model->description,"PEMASUKAN DR JOMBANG")!==FALSE){
+				$model->code_id=300;
+			}elseif(strpos($model->description,"TIKET MAINAN")!==FALSE){
+				$model->code_id=501;
+			}elseif(strpos($model->description,"TIKET SEPEDA AIR")!==FALSE){
+				$model->code_id=502;
+			}
+
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
+		}
+
+		$this->render('createWisata',array(
+			'model'=>$model,
+		));
+	}
+
 
 	public function actionPb(){
 		$model=new FormModelPb;
@@ -164,7 +225,12 @@ class TransactionController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Transaction::model()->findByPk($id);
+		$model=Transaction::model()->find(array(
+			'condition'=>'account_id in (select account_id from user_account where user_id=:user_id) and id=:id',
+			'params'=>array(
+				':user_id'=>Yii::app()->user->data()->id,
+				':id'=>$id)
+		));
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

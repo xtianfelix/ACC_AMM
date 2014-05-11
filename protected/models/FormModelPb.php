@@ -49,8 +49,13 @@ class FormModelPb extends CFormModel
 		$toTransaction->code_id = $this->code_id;
 		$fromTransaction->code_id = $this->code_id;
 
+		$toTransaction->tgl = $this->tgl;
+		$fromTransaction->tgl = $this->tgl;
+		$toTransaction->tgl_pb = $this->tglPb;
+		$fromTransaction->tgl_pb = $this->tglPb;
+
 		if(($fromTransaction->save())&&($toTransaction->save())){
-			$controller->redirect(array('account/view','id'=>$this->to_account_id));
+			$controller->redirect(array('transaction/view','id'=>$fromTransaction->id));
 		}
 
 	}

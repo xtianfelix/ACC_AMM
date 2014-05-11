@@ -61,21 +61,54 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
+		if(Yii::app()->user->hasRole("tempatWisata")){
+			$today = new DateTime();
+			$today->format('Y-m-d');
+		}
 		$transactionRows=null;
-		if(Yii::app()->user->data()->username=="vita"){
+		if(Yii::app()->user->data()->username=="rena"){
 			$transactionRows=Transaction::model()->findAll(array(
 				'order'=>'id DESC',
-				'limit'=>'50',
+				'limit'=>'10',
+				'condition'=>'account_id in (select account_id from user_account where user_id=:user_id)
+					and nama_id=:nama_id',
+				'params'=>array(
+					':user_id'=>Yii::app()->user->data()->id,
+					':nama_id'=>3491)
+			));
+		}else
+		if(Yii::app()->user->data()->username=="lia"){
+			$transactionRows=Transaction::model()->findAll(array(
+				'order'=>'id DESC',
+				'limit'=>'10',
+				'condition'=>'account_id in (select account_id from user_account where user_id=:user_id)
+					and nama_id=:nama_id',
+				'params'=>array(
+					':user_id'=>Yii::app()->user->data()->id,
+					':nama_id'=>3497)
+			));
+		}else
+		if(Yii::app()->user->data()->username=="yovita"){
+			$transactionRows=Transaction::model()->findAll(array(
+				'order'=>'id DESC',
+				'limit'=>'10',
 				'condition'=>'kas_id=:kas_id',
 				'params'=>array(':kas_id'=>'1')
+			));
+		}elseif(Yii::app()->user->data()->username=="admin"){
+			$transactionRows=Transaction::model()->findAll(array(
+				'order'=>'id DESC',
+				'limit'=>'10',
 			));
 		}else{
 			$transactionRows=Transaction::model()->findAll(array(
 				'order'=>'id DESC',
 				'limit'=>'50',
+				'condition'=>'account_id in (select account_id from user_account where user_id=:user_id)',
+				'params'=>array(':user_id'=>Yii::app()->user->data()->id)
 			));
 		}
-		$this->render('index',array('transactionRows'=>$transactionRows,));
+		$this->render('index',array('transactionRows'=>$transactionRows,));		
 	}
 
 	/**

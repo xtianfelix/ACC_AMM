@@ -43,9 +43,10 @@ class Transaction extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, account_id, tgl, tgl_pb, kas_id, nama_id, bln_jl, unit, lunas_id, code_id, num', 'numerical'),
+			array('id, account_id, kas_id, nama_id, unit, lunas_id, code_id, num', 'numerical'),
 			array('description', 'length', 'max'=>255),
-			// The following rule is used by search().
+			array('tgl,tgl_pb', 'safe'),
+						// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, account_id, tgl, tgl_pb, description, kas_id, nama_id, bln_jl, unit, lunas_id, code_id, num', 'safe', 'on'=>'search'),
 		);

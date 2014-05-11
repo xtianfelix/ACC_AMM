@@ -2,6 +2,7 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name;
+if(count($transactionRows)>0){
 ?>
 <div class="tabbable"> <!-- Only required for left/right tabs -->
   <ul class="nav nav-tabs">
@@ -34,15 +35,24 @@ $this->pageTitle=Yii::app()->name;
 								$class="error";
 	*/
 								$this->renderPartial('/transaction/_row', array('data'=>$value));
+								$sum+=$value->num;
 						 ?>
 						
-						<?php } ?>
+						<?php }	?>
+						<tr>
+							<td colspan='999' align='center'><b>TOTAL: <?php echo number_format($sum,2,".",","); ?></b></td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div><!-- div overflow end -->
     </div><!-- tab pane 1 end -->
   </div>
+<?php
+}else{
+	echo "<h1 class='text-center'>Belum Ada Transaksi</h1>";
+}
+?>
   <script type="text/javascript">
  	$(document).ready( function() {
   		$('#of_table').css('width',$('#of_table table').css('width'));

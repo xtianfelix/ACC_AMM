@@ -38,8 +38,12 @@ class Controller extends CController
 		if(!$this->layout)
 		{
 			//	Pick the most appropriate layout for this user
-			if($this->loggedInUser())
-				$this->layout = 'column1';
+			if($this->loggedInUser()){
+				if(Yii::app()->user->hasRole("tempatWisata"))
+					$this->layout = 'wisataLayout';
+				else
+					$this->layout = 'column1';
+			}
 			else
 				$this->layout = 'column2';
 		}

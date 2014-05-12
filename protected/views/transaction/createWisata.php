@@ -19,6 +19,8 @@ if(Yii::app()->user->data()->username=="lia"){
 	$nama_ids="3491";
 }elseif(Yii::app()->user->data()->username=="ferry"){
 	$nama_ids="3491,3,896,3492,3493,3494,3495,3496,3497";
+}elseif(Yii::app()->user->data()->username=="joko"){
+	$nama_ids="3491,3,896,3492,3493,3494,3495,3496,3497";
 }
 ?>
 

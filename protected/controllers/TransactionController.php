@@ -129,6 +129,13 @@ class TransactionController extends Controller
 				$model->code_id=502;
 			}
 
+			$date = new DateTime();
+			$date->setTime(0,0,0);
+			$date->sub(new DateInterval('P1D'));
+			if(strtotime($model->tgl)<strtotime($date->format('Y-m-d'))){
+				$model->tgl=$date->format('Y-m-d');
+			}
+
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

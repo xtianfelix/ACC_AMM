@@ -4,6 +4,8 @@
 	<table class="table table-hover" style="<!-- width:1800px; -->">
 		<?php
 		$count=0;
+			$totalDebet=0;
+			$totalKredit=0;
 		$location="";
 		foreach($rows as $key => $row){
 			$count+=count($row);
@@ -32,22 +34,25 @@
 					$sumKredit-=$value->num;
 				$this->renderPartial('/transaction/_row', array('data'=>$value));?>
 			<?php } ?>
-			<tr>
-				<td colspan='999' align='center'><b>TOTAL: <?php echo number_format($sumDebet,2,".",","); ?></b></td>
-			</tr>
 		</tbody>
 		<thead>
 			<tr>
 				<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>Jumlah</b></td><td></td>
 				<td><div class="text-right"><b><?php echo number_format($sumDebet,0,'',','); ?></b></div></td>
 				<td><div class="text-right"><b><?php echo number_format($sumKredit,0,'',','); ?></b></div></td>
-				<td><div class="text-right"><b><?php echo number_format($sumNetto,0,'',','); ?></b></div></td>
-				<td><div class="text-right"><b><?php echo number_format($sumTdp,0,'',','); ?></b></div></td>
-				<td><div class="text-right"><b><?php echo number_format($sumKurang,0,'',','); ?></b></div></td>
+				<td><div class="text-right"><b><?php echo number_format($sumDebet-$sumKredit,0,'',','); ?></b></div></td>
 				<td></td><td></td>
 			</tr>
 		</thead>
-		<?php } ?>
+		<?php 
+		$totalKredit+=$sumKredit;
+		$totalDebet+=$sumDebet;
+		} ?>
+		<tbody>
+			<tr>
+				<td colspan='999' align='center'><b>TOTAL: <?php echo number_format($totalDebet-$totalKredit,2,".",","); ?></b></td>
+			</tr>
+		</tbody>
 	</table>
 </div>
 <?php 

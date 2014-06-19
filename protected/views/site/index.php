@@ -13,35 +13,28 @@ if(count($transactionRows)>0){
 		<div style="overflow:auto;"> <!-- div overflow -->
 			<div id="of_table" style="width:1980px;margin:0px auto;">
 				<table class="table table-hover" style="width:auto;">
-					<?php
-					$sum=0;
-					 ?>
 					<thead>
 						<tr><?php
-							foreach ($transactionRows[0]->attributeLabels() as $label) {
+							foreach (Transaction::model()->attributeLabels() as $label) {
 								echo "<th>$label</th>";
 							} ?>
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach($transactionRows as $value){/*
-							$date1 = new DateTime($value->TANGGAL_TERJUAL);
-							$date2 = new DateTime();
-							$interval = $date1->diff($date2);
-							$class="";
-							if($interval->days>20)
-								$class="warning";
-							if($interval->days>30)
-								$class="error";
-	*/
-								$this->renderPartial('/transaction/_row', array('data'=>$value));
-								$sum+=$value->num;
-						 ?>
-						
-						<?php }	?>
-						<tr>
-							<td colspan='999' align='center'><b>TOTAL: <?php echo number_format($sum,2,".",","); ?></b></td>
-						</tr>
+						<?php foreach($transactionRows as $key => $subRows){
+							$sum=0;
+							if(count($subRows)!=0){
+								echo "<tr><th colspan='99'>$key</th></tr>";
+								foreach($subRows as $value){
+									$this->renderPartial('/transaction/_row', array('data'=>$value));
+									$sum+=$value->num;
+								}?>
+								<tr>
+									<td colspan='999' align='center'><b>TOTAL: <?php echo number_format($sum,2,".",","); ?></b></td>
+								</tr>
+							<?php
+							}
+						} ?>
 					</tbody>
 				</table>
 			</div>

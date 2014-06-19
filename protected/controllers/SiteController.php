@@ -61,20 +61,70 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
+		$today = new DateTime();
+		$oneDayAgo = new DateTime();
+		$twoDaysAgo = new DateTime();
+		$interval = DateInterval::createFromDateString('1 day');
+		$oneDayAgo=$oneDayAgo->sub($interval);
+		$twoDaysAgo=$twoDaysAgo->sub($interval)->sub($interval);
+
 		if(Yii::app()->user->hasRole("tempatWisata")){
-			$today = new DateTime();
 			$today->format('Y-m-d');
 		}
 		$transactionRows=null;
-		if(Yii::app()->user->data()->username=="rena"){
-			$transactionRows=Transaction::model()->findAll(array(
+		if(Yii::app()->user->data()->username=="joko"){
+			$transactionRows[$today->format('d M Y')]=Transaction::model()->findAll(array(
 				'order'=>'id DESC',
-				'limit'=>'10',
-				'condition'=>'account_id in (select account_id from user_account where user_id=:user_id)
-					and nama_id=:nama_id',
-				'params'=>array(
+				'condition'=>'tgl=:tgl and account_id in (select account_id from user_account where user_id=:user_id)
+					',
+				'params'=>array(':tgl'=>$today->format('Y-m-d'),
 					':user_id'=>Yii::app()->user->data()->id,
-					':nama_id'=>3491)
+				),
+			));
+			$transactionRows[$oneDayAgo->format('d M Y')]=Transaction::model()->findAll(array(
+				'order'=>'id DESC',
+				'condition'=>'tgl=:tgl and account_id in (select account_id from user_account where user_id=:user_id)
+					',
+				'params'=>array(':tgl'=>$oneDayAgo->format('Y-m-d'),
+					':user_id'=>Yii::app()->user->data()->id,
+				),
+			));
+			$transactionRows[$twoDaysAgo->format('d M Y')]=Transaction::model()->findAll(array(
+				'order'=>'id DESC',
+				'condition'=>'tgl=:tgl and account_id in (select account_id from user_account where user_id=:user_id)
+					',
+				'params'=>array(':tgl'=>$twoDaysAgo->format('Y-m-d'),
+					':user_id'=>Yii::app()->user->data()->id,
+				),
+			));
+		}else
+		if(Yii::app()->user->data()->username=="rena"){
+			$transactionRows[$today->format('d M Y')]=Transaction::model()->findAll(array(
+				'order'=>'id DESC',
+				'condition'=>'tgl=:tgl and account_id in (select account_id from user_account where user_id=:user_id)
+					and nama_id=:nama_id',
+				'params'=>array(':tgl'=>$today->format('Y-m-d'),
+					':user_id'=>Yii::app()->user->data()->id,
+					':nama_id'=>3491
+				),
+			));
+			$transactionRows[$oneDayAgo->format('d M Y')]=Transaction::model()->findAll(array(
+				'order'=>'id DESC',
+				'condition'=>'tgl=:tgl and account_id in (select account_id from user_account where user_id=:user_id)
+					and nama_id=:nama_id',
+				'params'=>array(':tgl'=>$oneDayAgo->format('Y-m-d'),
+					':user_id'=>Yii::app()->user->data()->id,
+					':nama_id'=>3491
+				),
+			));
+			$transactionRows[$twoDaysAgo->format('d M Y')]=Transaction::model()->findAll(array(
+				'order'=>'id DESC',
+				'condition'=>'tgl=:tgl and account_id in (select account_id from user_account where user_id=:user_id)
+					and nama_id=:nama_id',
+				'params'=>array(':tgl'=>$twoDaysAgo->format('Y-m-d'),
+					':user_id'=>Yii::app()->user->data()->id,
+					':nama_id'=>3491
+				),
 			));
 		}else
 		if(Yii::app()->user->data()->username=="lia"){
@@ -96,9 +146,23 @@ class SiteController extends Controller
 				'params'=>array(':kas_id'=>'1')
 			));
 		}elseif(Yii::app()->user->data()->username=="admin"){
-			$transactionRows=Transaction::model()->findAll(array(
+			$transactionRows[$today->format('d M Y')]=Transaction::model()->findAll(array(
 				'order'=>'id DESC',
-				'limit'=>'10',
+				'condition'=>'tgl=:tgl',
+				'params'=>array(':tgl'=>$today->format('Y-m-d')),
+				'limit'=>'100',
+			));
+			$transactionRows[$oneDayAgo->format('d M Y')]=Transaction::model()->findAll(array(
+				'order'=>'id DESC',
+				'condition'=>'tgl=:tgl',
+				'params'=>array(':tgl'=>$oneDayAgo->format('Y-m-d')),
+				'limit'=>'100',
+			));
+			$transactionRows[$twoDaysAgo->format('d M Y')]=Transaction::model()->findAll(array(
+				'order'=>'id DESC',
+				'condition'=>'tgl=:tgl',
+				'params'=>array(':tgl'=>$twoDaysAgo->format('Y-m-d')),
+				'limit'=>'100',
 			));
 		}else{
 			$transactionRows=Transaction::model()->findAll(array(

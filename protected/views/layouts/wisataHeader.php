@@ -55,6 +55,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
       <ul class="nav navbar-nav">
         <li class=""><a href="<?php echo $this->createUrl('/transaction/pb'); ?>">Pemindah Bukuan</a></li>
         <li><a href="<?php echo $this->createUrl('/transaction/createWisata'); ?>">Pemasukan</a></li>
+        <li><a href="<?php echo $this->createUrl('/transaction/create'); ?>">Lainnya</a></li>
         <li><a href="<?php echo $this->createUrl('/transaction/calculator'); ?>">Calculator</a></li>
         <?php if($this->isAdmin()){ ?>
         	<li><a href="<?php echo $this->createUrl('/mutasi'); ?>">Laporan</a></li>

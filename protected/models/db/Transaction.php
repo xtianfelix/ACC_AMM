@@ -16,6 +16,9 @@
  * @property double $lunas_id
  * @property double $code_id
  * @property double $num
+ * @property integer $is_deleted
+ * @property integer $insert_timestamp
+ * @property integer $update_timestamp
  *
  * The followings are the available model relations:
  * @property Nama $nama
@@ -43,7 +46,7 @@ class Transaction extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, account_id, kas_id, nama_id, unit, lunas_id, code_id, num', 'numerical'),
+			array('id, account_id, kas_id, nama_id, unit, lunas_id, code_id, num, is_deleted, insert_timestamp, update_timestamp', 'numerical'),
 			array('description', 'length', 'max'=>255),
 			array('tgl,tgl_pb', 'safe'),
 						// The following rule is used by search().

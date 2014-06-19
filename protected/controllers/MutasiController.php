@@ -9,16 +9,16 @@ class MutasiController extends Controller
 	}
 	public function actionGenerate()
 	{
-		$model = new FormModelReport;
-		if(isset($_POST['FormModelReport']))
+		$model = new FormModelMutasi;
+		if(isset($_POST['FormModelMutasi']))
 		{
-			$model->attributes = $_POST['FormModelReport'];
+			$model->attributes = $_POST['FormModelMutasi'];
 		}
 		$type=$model->jenisLaporan;
 		$tempBegin=$model->fromDate;
 		$tempEnd=$model->toDate;
 		$periodText=$model->periodeLaporan;
-		$location_id=$model->location_id;
+		$account_id=$model->account_id;
 		$supplier_id=$model->supplier_id;
 
 		switch ($periodText) {
@@ -45,33 +45,28 @@ class MutasiController extends Controller
 
 		switch ($type) {
 			case 1:
-				$type='penjualan';
-				/*------------- LAPORAN DETAIL PENJUALAN -------------*/
+				$type='detail';
+				/*------------- LAPORAN DETAIL MUTASI -------------*/
 				foreach ( $period as $dt ){
 				  	$tempBegin = $dt->format( "Y-m-d" );
 				  	$tempEnd = $dt->add($interval)->format( "Y-m-d" );
 
-					$filterLocation=" and :location_id=:location_id";
-					if($location_id!=0){
-						$filterLocation=" and location_id=:location_id";
+					$filterAccount=" and :account_id=:account_id";
+					if($account_id!=0){
+						$filterAccount=" and account_id=:account_id";
 					}
-					$filterSupplier=" and :supplier_id=:supplier_id";
-					if($supplier_id!=0){
-						$filterSupplier=" and supplier_id=:supplier_id";
-					}
-					$row = Penjualan::model()->list()
-						->with(array('stock'))->findAll('TANGGAL_TERJUAL>=:awal AND TANGGAL_TERJUAL<:akhir'.$filterLocation.$filterSupplier,
+					$row = Transaction::model()
+						->findAll('tgl_pb>=:awal AND tgl_pb<:akhir'.$filterAccount,
 						array(':awal' => $tempBegin,
 							':akhir' => $tempEnd,
-							':location_id' => $location_id,
-							':supplier_id' => $supplier_id,
+							':account_id' => $account_id,
 						));
 					if(count($row)!=0){
 						$tempBeginDate=new DateTime($tempBegin);
 						$rows[$tempBeginDate->format( $formatSubHeader )]=$row;
 					}
 				}
-				/*------------- LAPORAN DETAIL PENJUALAN -------------*/
+				/*------------- LAPORAN DETAIL MUTASI -------------*/
 				break;
 			case 2:
 				$type='pembelian';

@@ -1,11 +1,11 @@
 <?php
-class FormModelReport extends CFormModel
+class FormModelMutasi extends CFormModel
 {
 	public $jenisLaporan;
 	public $periodeLaporan;
 	public $fromDate;
 	public $toDate;
-	public $location_id;
+	public $account_id;
 	public $supplier_id;
 
 	public function rules()
@@ -17,7 +17,7 @@ class FormModelReport extends CFormModel
 		$rules[] = array('periodeLaporan', 'safe');
 		$rules[] = array('fromDate', 'safe');
 		$rules[] = array('toDate', 'safe');
-		$rules[] = array('location_id', 'safe');
+		$rules[] = array('account_id', 'safe');
 		$rules[] = array('supplier_id', 'safe');
 		return $rules;
 	}

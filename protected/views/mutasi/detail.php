@@ -6,6 +6,7 @@
 		$count=0;
 			$totalDebet=0;
 			$totalKredit=0;
+			$sum=array();
 		$location="";
 		foreach($rows as $key => $row){
 			$count+=count($row);
@@ -17,22 +18,36 @@
 			<tr><?php
 				foreach (Transaction::model()->attributeLabels() as $label) {
 					echo "<th>$label</th>";
-				} ?>
+				}
+				echo "<th>Lbr</th>"; ?>
 			</tr>
 		</thead>
 		<tbody>
-			<?php $number=0;
+			<?php 
+			$number=0;
 			$sumDebet=0;
 			$sumKredit=0;
 			$sumNetto=0;
 			$sumTdp=0;
 			$sumKurang=0;
 			foreach($row as $key => $value){
+
 				if($value->num>0)
 					$sumDebet+=$value->num;
 				else
 					$sumKredit-=$value->num;
-				$this->renderPartial('/transaction/_row', array('data'=>$value));?>
+
+				if(strpos($value->description,':') !== false){
+					if(!isset($sum[$value->description])){
+						$sum[$value->description]=0;
+					}
+					$splitted=explode(':',$value->description);
+					$hargaSatuan=($splitted[1]*1000);
+					$lbr=($value->num/$hargaSatuan);
+					$sum[$value->description]+=$lbr;
+				}
+
+				$this->renderPartial('/transaction/_rowWisata', array('data'=>$value));?>
 			<?php } ?>
 		</tbody>
 		<thead>
@@ -56,6 +71,11 @@
 	</table>
 </div>
 <?php 
+echo "<table border='1'>";
+foreach ($sum as $key => $value) {
+	echo "<tr><td style='width:300px;'> $key </td><td> $value</td></tr>";
+}
+echo "</table>";
 	$this->pageTitle=Yii::app()->name . " - Penjualan ";
 ?>
 

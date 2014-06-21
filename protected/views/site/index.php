@@ -26,7 +26,7 @@ if(count($transactionRows)>0){
 							if(count($subRows)!=0){
 								echo "<tr><th colspan='99'>$key</th></tr>";
 								foreach($subRows as $value){
-									$this->renderPartial('/transaction/_row', array('data'=>$value));
+									$this->renderPartial('/transaction/_rowWisata', array('data'=>$value));
 									$sum+=$value->num;
 								}?>
 								<tr>
@@ -57,6 +57,18 @@ if(count($transactionRows)>0){
 	.table tbody tr.error>td{
 		animation:error 1s infinite;
 		-webkit-animation:error 1s infinite; /* Safari and Chrome */
+	}
+	tbody tr td:nth-child(4),tbody tr td:nth-child(4){
+		display: none;
+	}
+	thead tr th:nth-child(4),thead tr th:nth-child(4){
+		display: none;
+	}
+	tbody tr td:nth-child(8),tbody tr td:nth-child(8){
+		display: none;
+	}
+	thead tr th:nth-child(8),thead tr th:nth-child(8){
+		display: none;
 	}
 	@keyframes error
 	{

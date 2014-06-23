@@ -48,6 +48,15 @@ class Account extends ActiveRecord
 		);
 	}
 
+	public function balance($date){
+		$balance = Yii::app()->db->createCommand()
+		    ->select('sum(num) as bal')
+		    ->from('transaction')
+		    ->where('account_id=:id and tgl_pb<:tgl', array(':id'=>$this->id,':tgl'=>$date,))
+		    ->queryScalar();
+		return $balance;
+	}
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */

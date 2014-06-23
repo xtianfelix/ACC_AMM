@@ -23,7 +23,7 @@ if(count($transactionRows)>0){
 					<tbody>
 						<?php foreach($transactionRows as $key => $subRows){
 							$sum=0;
-							if(count($subRows)!=0){
+							if(count($subRows)>0){
 								echo "<tr><th colspan='99'>$key</th></tr>";
 								foreach($subRows as $value){
 									$this->renderPartial('/transaction/_rowWisata', array('data'=>$value));

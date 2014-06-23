@@ -10,8 +10,8 @@ class FormModelMutasi extends CFormModel
 
 	public function rules()
 	{
-		$rules = array();/*
-		$rules[] = array('email, subject, message', 'required', 'message' => '{attribute} is required');
+		$rules = array();
+		$rules[] = array('account_id', 'required', 'message' => '{attribute} is required');/*
 		$rules[] = array('email', 'email', 'message' => '{attribute} is not valid');*/
 		$rules[] = array('jenisLaporan', 'safe');
 		$rules[] = array('periodeLaporan', 'safe');

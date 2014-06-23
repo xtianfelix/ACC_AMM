@@ -16,6 +16,11 @@
 		echo "<td>".(is_object($data->lunas)?$data->lunas->lunas:"")."</td>";
 		echo "<td>".$data->code_id."</td>";
 		echo "<td><div class='text-right'>". ($data->num>0?number_format($data->num,2,".",",")."</div></td><td><div class='text-right'>":"</div></td><td><div class='text-right'>".number_format(-$data->num,2,".",",")) ."</div></td>";
+		if(isset($balance)){
+			echo "<td><div class='text-right'>".number_format(($balance),2,".",",")."</div></td>";
+		}else{
+			echo "<td>&nbsp;</td>";
+		}
 		if(strpos($data->description,':') !== false){
 			$splitted=explode(':',$data->description);
 			$hargaSatuan=($splitted[1]*1000);

@@ -10,6 +10,12 @@
 		$location="";
 		foreach($rows as $key => $row){
 			$count+=count($row);
+			$balance=0;
+			if(count($row)>0){
+				$first=reset($row);
+				$acc=Account::model()->findByPk($first->account_id);
+				$balance=$acc->balance($first->tgl_pb);
+			}
 		 ?>
 		<thead>
 			<tr>
@@ -19,6 +25,7 @@
 				foreach (Transaction::model()->attributeLabels() as $label) {
 					echo "<th>$label</th>";
 				}
+				echo "<th>Saldo</th>";
 				echo "<th>Lbr</th>"; ?>
 			</tr>
 		</thead>
@@ -47,7 +54,7 @@
 					$sum[$value->description]+=$lbr;
 				}
 
-				$this->renderPartial('/transaction/_rowWisata', array('data'=>$value));?>
+				$this->renderPartial('/transaction/_rowWisata', array('data'=>$value,'balance'=>$balance+=$value->num,));?>
 			<?php } ?>
 		</tbody>
 		<thead>

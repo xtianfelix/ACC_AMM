@@ -141,6 +141,12 @@ return array(
 			),
 			'timeout' => (86400 * 60)	//	60 days
 		),
+		'clientScript' => array(
+                'scriptMap' => array(
+                        'jquery.js' => false,
+                        'jquery.min.js' => false,
+                ),
+        ),
 	),
 
 	// application-level parameters that can be accessed

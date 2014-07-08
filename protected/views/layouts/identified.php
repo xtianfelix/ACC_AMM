@@ -61,7 +61,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo Yii::app()->user->data()->username; ?> <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo $this->createUrl('/profile/profile/update'); ?>">Profile</a></li>
             <li class="divider"></li>

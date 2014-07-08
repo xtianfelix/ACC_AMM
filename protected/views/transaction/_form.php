@@ -108,7 +108,8 @@ $form=$this->beginWidget('CActiveForm', array(
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'lunas_id'); ?>
-		<?php echo $form->textField($model,'lunas_id'); ?>
+		<?php $lunasList=CHtml::listData(Lunas::model()->findAll(), 'id', 'lunas'); ?>
+		<?php echo $form->dropDownList($model,'lunas_id', $lunasList, array(/*'class'=>'input-xlarge'*/)); ?>
 		<?php echo $form->error($model,'lunas_id'); ?>
 	</div>
 

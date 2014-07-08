@@ -6,7 +6,37 @@
 
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+
+<?php 
+
+echo CHtml::ajaxLink(
+	'Test request',          // the link body (it will NOT be HTML-encoded.)
+	array('nama/check'), // the URL for the AJAX request. If empty, it is assumed to be the current URL.
+	array(
+		'type' =>'POST',
+		'data' =>array( 
+			'main_c_token' => Yii::app()->request->csrfToken,
+			'nama' => 'js:$("#nama").val()',
+			'ajax' => 'true',
+		),
+		'success'=>'js:function(data){
+			if(data!="[]"){
+				data=$.parseJSON(data);
+				$("#req_res").html("");
+				for(var key in data) 
+	       			$("#req_res").append("<a href=\"#\" onclick=\"$(\\\'#Transaction_nama_id\\\').val(\\\'"+key+"\\\');$(\\\'#nama\\\').val(\\\'"+data[key]+"\\\');$(\\\'#req_res\\\').css(\\\'display\\\',\\\'none\\\');return false;\">"+data[key]+"</a><br/>");
+			}else{
+				$("#req_res").html("Nama tidak ditemukan, buat baru? <input type=\"button\" value=\"Ya\" onclick=\"createNama();\"/>");
+			}
+		}',
+	),
+	array(
+		'id'=>'ajaxLink',
+		'style'=>'display:none;',
+	)
+);
+
+$form=$this->beginWidget('CActiveForm', array(
 	'id'=>'transaction-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
@@ -51,10 +81,17 @@
 		<?php echo $form->error($model,'kas_id'); ?>
 	</div>
 
-	<div class="row">
+	<div class="row" style="display:none;">
 		<?php $namaList=CHtml::listData(Nama::model()->findAll(), 'id', 'nama'); ?>
-		<?php echo $form->labelEx($model,'nama_id'); ?><?php echo $form->dropDownList($model,'kas_id', $namaList, array(/*'class'=>'input-xlarge'*/)); ?>
+		<?php echo $form->textField($model,'nama_id'); ?>
 		<?php echo $form->error($model,'nama_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'nama_id'); ?>
+		<input type="text" id="nama"/>
+		<?php echo $form->error($model,'nama_id'); ?>
+		<div id="req_res">...</div>
 	</div>
 
 	<div class="row">
@@ -99,8 +136,33 @@
 <script type="text/javascript">
 	var nowTemp = new Date();
 	var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+	function createNama(){
+		console.log("create nama");
+		$.ajax({
+			type: "POST",
+			url: "../nama/create",
+			data: { 
+				'Nama[nama]': $("#nama").val(), 
+				'main_c_token': "<?php echo Yii::app()->request->csrfToken; ?>",
+				'ajax': 'true'
+			}
+		})
+		.done(function( msg ) {
+			$('#Transaction_nama_id').val(msg);
+			$('#req_res').css('display','none');
+			alert('Nama telah dibuat denga nomor '+msg);
+		});
+	}
 
  	$(document).ready( function() {
+
+ 		$('#nama').keyup(function(){
+ 			if($(this).val().length>2){
+ 				$("#req_res").css('display','block');
+ 				$("#ajaxLink").trigger('click');
+ 				console.log($(this).val().length);	
+ 			}
+ 		});
 
     	$("#pop").popover();
     	var dp1=$('#dp1').datepicker({

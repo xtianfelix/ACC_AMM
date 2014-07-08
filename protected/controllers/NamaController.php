@@ -22,7 +22,7 @@ class NamaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('check','index','view'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -37,6 +37,29 @@ class NamaController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionCheck(){
+		$nama=$_POST['nama'];
+		$data=CHtml::listData(Nama::model()->findAll(array(
+			'order'=>'nama ASC',
+			'limit'=>'10',
+			'condition'=>'nama like :nama',
+			'params'=>array(
+				":nama"=>"%".$nama."%",
+			),
+		)), 'id', 'nama');
+		//echo $nama;
+		//we declare our data array\
+		
+		//here we check if this is really ajax call. 
+		//If it is not we throw a request denied exception
+		if(!isset($_POST['ajax']) && !$_POST['ajax']){
+		   throw new CHttpException('Request denied');
+		}
+		//We pass our data in json format back to our ajax link.
+		echo json_encode($data);
+		Yii::app()->end();
 	}
 
 	/**
@@ -60,8 +83,13 @@ class NamaController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Nama']))
+		if(isset($_POST['ajax']) && $_POST['ajax']){
+			$model->attributes=$_POST['Nama'];
+			if($model->save())
+				echo $model->id;
+			Yii::app()->end();
+		}
+		elseif(isset($_POST['Nama']))
 		{
 			$model->attributes=$_POST['Nama'];
 			if($model->save())

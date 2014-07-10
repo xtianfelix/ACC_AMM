@@ -52,7 +52,7 @@ class Account extends ActiveRecord
 		$balance = Yii::app()->db->createCommand()
 		    ->select('sum(num) as bal')
 		    ->from('transaction')
-		    ->where('account_id=:id and tgl_pb<:tgl', array(':id'=>$this->id,':tgl'=>$date,))
+		    ->where('account_id=:id and tgl<STR_TO_DATE(:tgl,"%Y-%m-%d")', array(':id'=>$this->id,':tgl'=>$date,))
 		    ->queryScalar();
 		return $balance;
 	}

@@ -22,11 +22,19 @@ if(count($transactionRows)>0){
 					</thead>
 					<tbody>
 						<?php foreach($transactionRows as $key => $subRows){
+							$count+=count($subRows);
+							$balance=0;
+							if(count($subRows)>0){
+								$first=reset($subRows);
+								$acc=Account::model()->findByPk($first->account_id);
+								$balance=$acc->balance($first->tgl);
+							}
+							
 							$sum=0;
 							if(count($subRows)>0){
 								echo "<tr><th colspan='99'>$key</th></tr>";
 								foreach($subRows as $value){
-									$this->renderPartial('/transaction/_rowWisata', array('data'=>$value));
+									$this->renderPartial('/transaction/_rowWisata', array('data'=>$value,'balance'=>$balance+=$value->num));
 									$sum+=$value->num;
 								}?>
 								<tr>

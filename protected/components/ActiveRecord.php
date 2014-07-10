@@ -21,6 +21,8 @@ class ActiveRecord extends CActiveRecord
 	{
 		if($this->hasAttribute('insert_timestamp'))
 			$this->insert_timestamp = time();
+		if($this->hasAttribute('insert_user_id'))
+			$this->insert_user_id = Yii::app()->user->data()->id;
 		if($this->hasAttribute('is_deleted'))
 			$this->is_deleted = 0;
 		return parent::insert($attributes);
@@ -30,6 +32,8 @@ class ActiveRecord extends CActiveRecord
 	{
 		if($this->hasAttribute('update_timestamp'))
 			$this->update_timestamp = time();
+		if($this->hasAttribute('update_user_id'))
+			$this->update_user_id = Yii::app()->user->data()->id;
 		return parent::beforeSave();
 	}
 	

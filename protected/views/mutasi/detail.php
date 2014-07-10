@@ -14,7 +14,7 @@
 			if(count($row)>0){
 				$first=reset($row);
 				$acc=Account::model()->findByPk($first->account_id);
-				$balance=$acc->balance($first->tgl_pb);
+				$balance=$acc->balance($first->tgl);
 			}
 		 ?>
 		<thead>

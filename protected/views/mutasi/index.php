@@ -19,7 +19,7 @@
 			    <div class="control-group">
 				    <?php echo $form->labelEx($model,'jenisLaporan',array('class'=>'control-label')); ?>
 				    <div class="controls">
-						<?php echo $form->dropDownList($model,'jenisLaporan', array('1'=>'Laporan Transaksi Jual','2'=>'Laporan Transaksi Beli','3'=>'Laporan Summary Penjualan','4'=>'Laporan Stock/Tanggal','5'=>'Laporan Daftar Biaya'), array('empty'=>'Pilih Jenis','class'=>'input-xlarge')); ?>
+						<?php echo $form->dropDownList($model,'jenisLaporan', array('1'=>'Mutasi'), array('empty'=>'Pilih Jenis','class'=>'input-xlarge')); ?>
 				    </div><!-- controls -->
 				    <?php echo $form->error($model,'jenisLaporan'); ?>
 			 	</div><!-- control-group -->
@@ -52,8 +52,13 @@
 			    <div class="control-group">
 				    <?php echo $form->labelEx($model,'account_id',array('class'=>'control-label'));?>
 				    <div class="controls">
-				    <?php $accountList=CHtml::listData(Account::model()->findAll(array('order'=>'account ASC')), 'id', 'account'); ?>
-						<?php echo $form->dropDownList($model,'account_id', $accountList, array('empty'=>'All','class'=>'input-xlarge')); ?>
+				    	<?php 
+				    	$accountList=CHtml::listData(Account::model()->findAll(array('order'=>'account ASC')), 'id', 'account');
+				    	if(!$this->isAdmin()){
+				    		$accountList=CHtml::listData(Yii::app()->user->data()->userAccounts, 'account_id', 'account.account');
+				    	}
+				    	?>
+						<?php echo $form->dropDownList($model,'account_id', $accountList, array(/*'empty'=>'All',*/'class'=>'input-xlarge')); ?>
 				    </div><!-- controls -->
 				    <?php echo $form->error($model,'account_id'); ?>
 			 	</div><!-- control-group -->

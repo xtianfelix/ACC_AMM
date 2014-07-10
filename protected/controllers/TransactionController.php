@@ -238,6 +238,13 @@ class TransactionController extends Controller
 				':user_id'=>Yii::app()->user->data()->id,
 				':id'=>$id)
 		));
+		if($this->isAdmin()){
+			$model=Transaction::model()->find(array(
+				'condition'=>'id=:id',
+				'params'=>array(
+					':id'=>$id)
+			));
+		}
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

@@ -56,7 +56,7 @@ class MutasiController extends Controller
 						$filterAccount=" and account_id=:account_id";
 					}
 					$row = Transaction::model()
-						->findAll('tgl_pb>=:awal AND tgl_pb<:akhir'.$filterAccount,
+						->findAll('tgl>=:awal AND tgl<:akhir'.$filterAccount,
 						array(':awal' => $tempBegin,
 							':akhir' => $tempEnd,
 							':account_id' => $account_id,
@@ -173,7 +173,7 @@ class MutasiController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('generate','index'),
-				'users'=>array('admin'),
+				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

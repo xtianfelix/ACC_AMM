@@ -139,11 +139,13 @@ class SiteController extends Controller
 			));
 		}else
 		if(Yii::app()->user->data()->username=="yovita"){
-			$transactionRows=Transaction::model()->findAll(array(
-				'order'=>'id DESC',
-				'limit'=>'10',
-				'condition'=>'kas_id=:kas_id',
-				'params'=>array(':kas_id'=>'1')
+
+			$interval = DateInterval::createFromDateString('7 day');
+			$tgl=$oneDayAgo->sub($interval);
+			$transactionRows[]=Transaction::model()->findAll(array(
+				'order'=>'tgl ASC, id ASC',
+				'condition'=>'account_id=:account_id and tgl>:tgl',
+				'params'=>array(':account_id'=>'10',':tgl'=>$tgl->format('Y-m-d'),)
 			));
 		}elseif(Yii::app()->user->data()->username=="admin"){
 			$transactionRows[$today->format('d M Y')]=Transaction::model()->findAll(array(

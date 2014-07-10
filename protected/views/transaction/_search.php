@@ -71,11 +71,6 @@
 		<?php echo $form->textField($model,'num'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'is_debet'); ?>
-		<?php echo $form->textField($model,'is_debet'); ?>
-	</div>
-
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>

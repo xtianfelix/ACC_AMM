@@ -142,7 +142,7 @@ class SiteController extends Controller
 
 			$interval = DateInterval::createFromDateString('7 day');
 			$tgl=$oneDayAgo->sub($interval);
-			$transactionRows[]=Transaction::model()->findAll(array(
+			$transactionRows[$tgl->format('d M Y')." - ".$today->format('d M Y')]=Transaction::model()->findAll(array(
 				'order'=>'tgl ASC, id ASC',
 				'condition'=>'account_id=:account_id and tgl>:tgl',
 				'params'=>array(':account_id'=>'10',':tgl'=>$tgl->format('Y-m-d'),)

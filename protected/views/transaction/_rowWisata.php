@@ -4,7 +4,7 @@
 
 
 	echo "<tr>";
-		echo "<td>".$data->id."</td>";
+		echo "<td><a href='".Yii::app()->createUrl("/transaction/update", array("id"=>$data->id))."'>".$data->id."</a></td>";
 		echo "<td>".$data->account->account."</td>";
 		echo "<td>".$data->tgl."</td>";
 		echo "<td>".$data->tgl_pb."</td>";

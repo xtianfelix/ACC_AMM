@@ -89,7 +89,7 @@ $form=$this->beginWidget('CActiveForm', array(
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'nama_id'); ?>
-		<input type="text" id="nama"/>
+		<input type="text" id="nama" value="<?php echo $model->nama_id==""?"":$model->nama->nama; ?>"/>
 		<?php echo $form->error($model,'nama_id'); ?>
 		<div id="req_res">...</div>
 	</div>
@@ -115,7 +115,12 @@ $form=$this->beginWidget('CActiveForm', array(
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'code_id'); ?>
-		<?php $codeList=CHtml::listData(Code::model()->findAll(), 'id', 'id'); ?>
+		<?php 
+		$codeArray = Yii::app()->db->createCommand()
+		    ->select('id, concat(id," - ",ifnull(keterangan,"")) as ket')
+		    ->from('code')
+		    ->query();
+		$codeList=CHtml::listData($codeArray, 'id', 'ket'); ?>
 		<?php echo $form->dropDownList($model,'code_id', $codeList, array(/*'class'=>'input-xlarge'*/)); ?>
 		<?php echo $form->error($model,'code_id'); ?>
 	</div>

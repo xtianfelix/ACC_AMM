@@ -27,7 +27,7 @@ class TransactionController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('view','create','pb'),
+				'actions'=>array('view','create','pb','update'),
 				'users'=>array('@'),
 			),
 			array('allow',

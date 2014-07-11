@@ -8,7 +8,7 @@
 		echo "<td>".$data->account->account."</td>";
 		echo "<td>".$data->tgl."</td>";
 		echo "<td>".$data->tgl_pb."</td>";
-		echo "<td>".$data->description."</td>";
+		echo "<td>".$data->description.(($data->kwt!="")?" | ".$data->kwt:"")."</td>";
 		echo "<td>".(is_object($data->kas)?$data->kas->kas:"")."</td>";
 		echo "<td>".(is_object($data->nama)?$data->nama->nama:"")."</td>";
 		echo "<td>".$data->bln_jl."</td>";

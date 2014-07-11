@@ -85,7 +85,6 @@ class Transaction extends ActiveRecord
 			'tgl' => 'Tgl',
 			'tgl_pb' => 'Tgl Pb',
 			'description' => 'Description',
-			'kwt' => 'KWT',
 			'kas_id' => 'Kas',
 			'nama_id' => 'Nama',
 			'bln_jl' => 'Bln Jl',
@@ -94,6 +93,7 @@ class Transaction extends ActiveRecord
 			'code_id' => 'Code',
 			'num' => 'Debet',
 			'kredit' => 'Kredit',
+			'kwt' => 'KWT',
 		);
 	}
 

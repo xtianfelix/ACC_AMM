@@ -9,6 +9,7 @@
  * @property date $tgl
  * @property date $tgl_pb
  * @property string $description
+ * @property string $kwt
  * @property double $kas_id
  * @property double $nama_id
  * @property double $bln_jl
@@ -49,7 +50,7 @@ class Transaction extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id, account_id, kas_id, nama_id, unit, lunas_id, code_id, num, is_deleted, insert_timestamp, update_timestamp, insert_user_id, update_user_id', 'numerical'),
-			array('description', 'length', 'max'=>255),
+			array('description,kwt', 'length', 'max'=>255),
 			array('tgl,tgl_pb', 'safe'),
 						// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -84,6 +85,7 @@ class Transaction extends ActiveRecord
 			'tgl' => 'Tgl',
 			'tgl_pb' => 'Tgl Pb',
 			'description' => 'Description',
+			'kwt' => 'KWT',
 			'kas_id' => 'Kas',
 			'nama_id' => 'Nama',
 			'bln_jl' => 'Bln Jl',

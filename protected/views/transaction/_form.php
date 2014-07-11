@@ -75,6 +75,12 @@ $form=$this->beginWidget('CActiveForm', array(
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'kwt'); ?>
+		<?php echo $form->textField($model,'kwt',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'kwt'); ?>
+	</div>
+
+	<div class="row">
 		<?php $kasList=CHtml::listData(Kas::model()->findAll(), 'id', 'kas'); ?>
 		<?php echo $form->labelEx($model,'kas_id'); ?>
 		<?php echo $form->dropDownList($model,'kas_id', $kasList, array(/*'class'=>'input-xlarge'*/)); ?>
@@ -173,9 +179,9 @@ $form=$this->beginWidget('CActiveForm', array(
     	$("#pop").popover();
     	var dp1=$('#dp1').datepicker({
 			format: 'yyyy-mm-dd',
-			onRender: function(date) {
+			/*onRender: function(date) {
 			  return date.valueOf() < now.valueOf() ? 'disabled' : '';
-			}
+			}*/
 		}).on('changeDate', function(ev){
 			$('#dp1').datepicker('hide');
 			dp2.setValue(ev.date);

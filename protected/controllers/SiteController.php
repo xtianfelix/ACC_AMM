@@ -138,7 +138,7 @@ class SiteController extends Controller
 					':nama_id'=>3497)
 			));
 		}else
-		if(Yii::app()->user->data()->username=="yovita"){
+		if((Yii::app()->user->data()->username=="yovita")||(Yii::app()->user->data()->username=="sisca")){
 
 			$interval = DateInterval::createFromDateString('7 day');
 			$tgl=$oneDayAgo->sub($interval);

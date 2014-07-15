@@ -193,8 +193,10 @@ $form=$this->beginWidget('CActiveForm', array(
 		}).data('datepicker');
 
 
-		dp1.setValue(nowTemp);
-		dp2.setValue(nowTemp);
+		if($('#dp1').val()=="")
+			dp1.setValue(nowTemp);
+		if($('#dp2').val()=="")
+			dp2.setValue(nowTemp);
 
 		$('#dp3').datepicker({
 			format: 'yyyy-mm-dd'

@@ -115,7 +115,7 @@ $form=$this->beginWidget('CActiveForm', array(
 	<div class="row">
 		<?php echo $form->labelEx($model,'lunas_id'); ?>
 		<?php $lunasList=CHtml::listData(Lunas::model()->findAll(), 'id', 'lunas'); ?>
-		<?php echo $form->dropDownList($model,'lunas_id', $lunasList, array(/*'class'=>'input-xlarge'*/)); ?>
+		<?php echo $form->dropDownList($model,'lunas_id', $lunasList, array('options' => array('2'=>array('selected'=>true))/*'class'=>'input-xlarge'*/)); ?>
 		<?php echo $form->error($model,'lunas_id'); ?>
 	</div>
 
@@ -125,6 +125,7 @@ $form=$this->beginWidget('CActiveForm', array(
 		$codeArray = Yii::app()->db->createCommand()
 		    ->select('id, concat(id," - ",ifnull(keterangan,"")) as ket')
 		    ->from('code')
+		    ->where('id not in ("100","101","102","103","104","106","107","108","109","112","113","215","216","300","311","415","600","601","604","715","800","801","803","915")')
 		    ->query();
 		$codeList=CHtml::listData($codeArray, 'id', 'ket'); ?>
 		<?php echo $form->dropDownList($model,'code_id', $codeList, array(/*'class'=>'input-xlarge'*/)); ?>
@@ -142,7 +143,12 @@ $form=$this->beginWidget('CActiveForm', array(
 	</div>
 
 <?php $this->endWidget(); ?>
-
+<br/>
+<?php if($model->id!="") echo CHtml::button('DELETE', array(
+		'submit' => array('transaction/delete', 'id' => $model->id),
+        'confirm' => 'Apakah anda yakin untuk delete transaksi bernomor ' . $model->id . '?',
+		'csrf' => true
+	)); ?>
 </div><!-- form -->
 
 <script type="text/javascript">

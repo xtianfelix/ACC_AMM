@@ -167,7 +167,7 @@ class SiteController extends Controller
 				'limit'=>'100',
 			));
 		}else{
-			$transactionRows=Transaction::model()->findAll(array(
+			$transactionRows[]=Transaction::model()->findAll(array(
 				'order'=>'id DESC',
 				'limit'=>'50',
 				'condition'=>'account_id in (select account_id from user_account where user_id=:user_id)',

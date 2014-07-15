@@ -50,7 +50,11 @@ $form=$this->beginWidget('CActiveForm', array(
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php $accountList=CHtml::listData(Yii::app()->user->data()->userAccounts, 'account_id', 'account.account'); ?>
+		<?php 
+		$accountList=CHtml::listData(Account::model()->findAll(array('order'=>'account ASC')), 'id', 'account');
+    	if(!$this->isAdmin()){
+    		$accountList=CHtml::listData(Yii::app()->user->data()->userAccounts, 'account_id', 'account.account');
+    	} ?>
 		<?php echo $form->labelEx($model,'account_id'); ?>
 		<?php echo $form->dropDownList($model,'account_id', $accountList, array(/*'class'=>'input-xlarge'*/)); ?>
 		<?php echo $form->error($model,'account_id'); ?>

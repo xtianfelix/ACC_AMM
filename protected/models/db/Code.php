@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'code':
  * @property double $id
+ * @property double $keterangan
  *
  * The followings are the available model relations:
  * @property Transaction[] $transactions
@@ -30,7 +31,7 @@ class Code extends ActiveRecord
 			array('id', 'numerical'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id', 'safe', 'on'=>'search'),
+			array('id, keterangan', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,6 +54,7 @@ class Code extends ActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+			'keterangan' => 'keterangan',
 		);
 	}
 

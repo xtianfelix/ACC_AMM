@@ -19,33 +19,33 @@
 			    <div class="control-group">
 				    <?php echo $form->labelEx($model,'jenisLaporan',array('class'=>'control-label')); ?>
 				    <div class="controls">
-						<?php echo $form->dropDownList($model,'jenisLaporan', array('1'=>'Mutasi'), array('empty'=>'Pilih Jenis','class'=>'input-xlarge')); ?>
+						<?php echo $form->dropDownList($model,'jenisLaporan', array('1'=>'Mutasi'), array('empty'=>'Pilih Jenis','class'=>'')); ?>
 				    </div><!-- controls -->
 				    <?php echo $form->error($model,'jenisLaporan'); ?>
 			 	</div><!-- control-group -->
 			    <div class="control-group">
 				    <?php echo $form->labelEx($model,'periodeLaporan',array('class'=>'control-label')); ?>
 				    <div class="controls">
-						<?php echo $form->dropDownList($model,'periodeLaporan', array('1'=>'Harian','2'=>'Bulanan','3'=>'Tahunan'), array('class'=>'input-xlarge','id'=>"periodeReport")); ?>
+						<?php echo $form->dropDownList($model,'periodeLaporan', array('1'=>'Harian','2'=>'Bulanan','3'=>'Tahunan'), array('class'=>'','id'=>"periodeReport")); ?>
 				    </div><!-- controls -->
 				    <?php echo $form->error($model,'periodeLaporan'); ?>
 			 	</div><!-- control-group -->
 			 	<div class="control-group">
 				    <label class="control-label">From Date </label>
 				    <div class="controls">
-						<input class="input-xlarge startRange1 dp1" type="text" style="margin-left:12px;">
-						<input class="input-xlarge startRange2 dp2" type="text" style="margin-left:12px;">
-						<input class="input-xlarge startRange3 dp3" type="text" style="margin-left:12px;">
+						<input class=" startRange1 dp1" type="text" style="margin-left:12px;">
+						<input class=" startRange2 dp2" type="text" style="margin-left:12px;">
+						<input class=" startRange3 dp3" type="text" style="margin-left:12px;">
 				    </div><!-- controls -->
 			 	</div><!-- control-group -->
 			 	<div class="control-group endDate">
 				    <label class="control-label">To Date </label>
 				    <div class="controls">
-						<input class="input-xlarge endRange1 dp4" id="inputError" type="text" style="margin-left:12px;">
+						<input class=" endRange1 dp4" id="inputError" type="text" style="margin-left:12px;">
 						<span style="margin-left:25px;" class="help-inline endError1">Date awal tidak boleh lebih kecil dari date akhir.</span>
-						<input class="input-xlarge endRange2 dp5" id="inputError" type="text" style="margin-left:12px;">
+						<input class=" endRange2 dp5" id="inputError" type="text" style="margin-left:12px;">
 						<span style="margin-left:25px;" class="help-inline endError2">Date awal tidak boleh lebih kecil dari date akhir.</span>
-						<input class="input-xlarge endRange3 dp6" id="inputError" type="text" style="margin-left:12px;">
+						<input class=" endRange3 dp6" id="inputError" type="text" style="margin-left:12px;">
 						<span style="margin-left:25px;" class="help-inline endError3">Date awal tidak boleh lebih kecil dari date akhir.</span>
 				    </div><!-- controls -->
 			 	</div><!-- control-group -->
@@ -58,7 +58,7 @@
 				    		$accountList=CHtml::listData(Yii::app()->user->data()->userAccounts, 'account_id', 'account.account');
 				    	}
 				    	?>
-						<?php echo $form->dropDownList($model,'account_id', $accountList, array(/*'empty'=>'All',*/'class'=>'input-xlarge')); ?>
+						<?php echo $form->dropDownList($model,'account_id', $accountList, array('empty'=>'All','class'=>'')); ?>
 				    </div><!-- controls -->
 				    <?php echo $form->error($model,'account_id'); ?>
 			 	</div><!-- control-group -->

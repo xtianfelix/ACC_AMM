@@ -104,11 +104,11 @@ $form=$this->beginWidget('CActiveForm', array(
 		<div id="req_res">...</div>
 	</div>
 
-	<div class="row">
+	<!--div class="row">
 		<?php echo $form->labelEx($model,'bln_jl'); ?>
 		<?php echo $form->textField($model,'bln_jl'); ?>
 		<?php echo $form->error($model,'bln_jl'); ?>
-	</div>
+	</div-->
 <!-- 
 	<div class="row">
 		<?php echo $form->labelEx($model,'unit'); ?>

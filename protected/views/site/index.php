@@ -21,7 +21,9 @@ if(count($transactionRows)>0){
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach($transactionRows as $key => $subRows){
+						<?php 
+						$count=0;
+						foreach($transactionRows as $key => $subRows){
 							$count+=count($subRows);
 							$balance=0;
 							if(count($subRows)>0){

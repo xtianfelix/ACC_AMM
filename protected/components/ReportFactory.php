@@ -116,6 +116,13 @@ class ReportFactory {
 							$value->lunas->lunas,
 							$value->code->id, 
 						);
+						if($value->num>=0){
+							$CSVRow[] = '';
+							$CSVRow[] = -$value->num;
+						}else{
+							$CSVRow[] = $value->num;
+							$CSVRow[] = '';
+						}
 /*						if($this->isAdmin){
 							$CSVRow[] = number_format($value->stock->totalBiaya()+$value->stock->HARGAPOKOK,0,'',',');
 							$CSVRow[] = number_format($value->HARGA_OTR-($value->stock->totalBiaya()+$value->stock->HARGAPOKOK),0,'',',');

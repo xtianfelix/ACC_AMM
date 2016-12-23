@@ -98,6 +98,8 @@ class ReportFactory {
 					'"KWT"', 
 					'"LUNAS"', 
 					'"CODE"', 
+					'"DEBET"', 
+					'"KREDIT"', 
 				);
 /*				if($this->isAdmin){
 					$CSVRows[0][] = '"HPP"';
@@ -117,11 +119,11 @@ class ReportFactory {
 							$value->code->id, 
 						);
 						if($value->num>=0){
-							$CSVRow[] = '';
-							$CSVRow[] = -$value->num;
-						}else{
 							$CSVRow[] = $value->num;
 							$CSVRow[] = '';
+						}else{
+							$CSVRow[] = '';
+							$CSVRow[] = -$value->num;
 						}
 /*						if($this->isAdmin){
 							$CSVRow[] = number_format($value->stock->totalBiaya()+$value->stock->HARGAPOKOK,0,'',',');

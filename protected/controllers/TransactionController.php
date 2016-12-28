@@ -34,6 +34,10 @@ class TransactionController extends Controller
 				'actions'=>array('createWisata','calculator'),
 				'expression' => 'Yii::app()->user->can("transaction_createWisata")'
 				),
+			array('allow',
+				'actions'=>array('delete'),
+				'expression' => 'Yii::app()->user->can("cancel_transaction")'
+				),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('update','index','admin','delete'),
 				'users'=>array('admin'),
@@ -189,11 +193,13 @@ class TransactionController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
-
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		$model=$this->loadModel($id);
+		$model->is_deleted=1;
+		if($model->save()){
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('select'));
+		}
 	}
 
 	/**

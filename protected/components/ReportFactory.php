@@ -55,7 +55,6 @@ class ReportFactory {
 				  	$tempBegin = $dt->format( "Y-m-d" );
 				  	$tempEnd = $dt->add($interval)->format( "Y-m-d" );
 
-					$filterAccount=" and :account_id=:account_id";
 					$bindings = array(
 						':awal' => $tempBegin,
 						':akhir' => $tempEnd,
@@ -66,7 +65,7 @@ class ReportFactory {
 						$bindings[':account_id'] = $account_id;
 					}
 					$row = Transaction::model()
-						->findAll('tgl>=:awal AND tgl<:akhir'.$filters,
+						->findAll('tgl>=:awal AND tgl<:akhir AND is_deleted!=1'.$filters,
 							$bindings
 						);
 					if(count($row)!=0){

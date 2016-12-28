@@ -154,6 +154,7 @@ $form=$this->beginWidget('CActiveForm', array(
 		'csrf' => true
 	)); ?>
 </div><!-- form -->
+<?php echo $model->is_deleted==1?"-----------DELETED-----------":""; ?>
 
 <script type="text/javascript">
 	var nowTemp = new Date();

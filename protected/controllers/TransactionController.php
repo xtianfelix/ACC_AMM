@@ -198,7 +198,7 @@ class TransactionController extends Controller
 		if($model->save()){
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('select'));
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('update','id'=>$model->id));
 		}
 	}
 

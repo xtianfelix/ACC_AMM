@@ -36,7 +36,10 @@
 	<?php $namaList=CHtml::listData(Nama::model()->findAll(), 'id', 'nama'); ?>
 	Nama: <?php echo $form->dropDownList($model,'nama_id', $namaList, array(/*'class'=>'input-xlarge'*/)); ?>
 	<br/>
-	Num: <?php echo $form->textField($model,'num'); ?>
+	Num: 
+	<div class="input-number">
+		<?php echo $form->textField($model,'num'); ?>
+	</div>
 	<br/>
 	Desc: <?php echo $form->textField($model,'description'); ?>
 	<br/>

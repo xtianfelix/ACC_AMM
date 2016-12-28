@@ -31,6 +31,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 	<script type='text/javascript' src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js"></script>
     <script type='text/javascript' src="<?php echo Yii::app()->request->baseUrl; ?>/js/app.js"></script>
     <script type='text/javascript' src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    <script type='text/javascript' src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery/jquery.autoNumeric.js"></script>
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
@@ -89,7 +90,20 @@ header('X-UA-Compatible: IE=edge,chrome=1');
  	$(document).ready( function() {
  		if($('.table').exists())
  			$('.table').tablesorter();
+ 		initInputNumber();
  	});
+ 	$('form').submit(function(){
+ 		$(this).find('.input-number > input').each(function(index){
+ 			$(this).val($(this).val().replace(/,/g, ""))
+ 		});
+ 		return true;
+ 	});
+ 	function initInputNumber(){
+ 		$('.input-number > input').autoNumeric('init',{aSep: ',', aDec: '.', wEmpty: 'zero', mDec: '0'});
+ 		$('.input-number > input').attr('data-a-sep','.');
+ 		$('.input-number > input').attr('data-a-dec',',');
+ 		$('.input-number > input').attr('data-w-empty','zero');
+ 	}
 </script>
 </body>
 </html>

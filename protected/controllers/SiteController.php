@@ -140,12 +140,12 @@ class SiteController extends Controller
 		}else
 		if((Yii::app()->user->data()->username=="yovita")||(Yii::app()->user->data()->username=="sisca")){
 
-			$interval = DateInterval::createFromDateString('7 day');
+			$interval = DateInterval::createFromDateString('30 day');
 			$tgl=$oneDayAgo->sub($interval);
 			$transactionRows[$tgl->format('d M Y')." - ".$today->format('d M Y')]=Transaction::model()->findAll(array(
 				'order'=>'tgl ASC, id ASC',
-				'condition'=>'account_id=:account_id and tgl>:tgl',
-				'params'=>array(':account_id'=>'10',':tgl'=>$tgl->format('Y-m-d'),)
+				'condition'=>'tgl>:tgl AND is_deleted!=1',
+				'params'=>array(':tgl'=>$tgl->format('Y-m-d'),)
 			));
 		}elseif(Yii::app()->user->data()->username=="admin"){
 			$transactionRows[$today->format('d M Y')]=Transaction::model()->findAll(array(

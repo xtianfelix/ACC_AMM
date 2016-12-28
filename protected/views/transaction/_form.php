@@ -93,7 +93,7 @@ $form=$this->beginWidget('CActiveForm', array(
 
 	<div class="row" style="display:none;">
 		<?php $namaList=CHtml::listData(Nama::model()->findAll(), 'id', 'nama'); ?>
-		<?php echo $form->textField($model,'nama_id'); ?>
+		<?php echo $form->textField($model,'nama_id', array('autocomplete'=>'off')); ?>
 		<?php echo $form->error($model,'nama_id'); ?>
 	</div>
 
@@ -138,7 +138,9 @@ $form=$this->beginWidget('CActiveForm', array(
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'num'); ?>
-		<?php echo $form->textField($model,'num'); ?>
+		<div class="input-number">
+			<?php echo $form->textField($model,'num'); ?>
+		</div>
 		<?php echo $form->error($model,'num'); ?>
 	</div>
 

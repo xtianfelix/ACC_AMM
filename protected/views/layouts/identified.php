@@ -118,7 +118,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
  		return true;
  	});
  	function initInputNumber(){
- 		$('.input-number > input').autoNumeric('init',{aSep: ',', aDec: '.', wEmpty: 'zero', mDec: '0'});
+ 		$('.input-number > input').autoNumeric('init',{aSep: ',', aDec: '.', wEmpty: 'zero', mDec: '0', vMin: '-9999999999', nBracket: '(,)'});
  		$('.input-number > input').attr('data-a-sep','.');
  		$('.input-number > input').attr('data-a-dec',',');
  		$('.input-number > input').attr('data-w-empty','zero');

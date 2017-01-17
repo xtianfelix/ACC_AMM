@@ -13,12 +13,12 @@
                         ),
 )); ?>
 	<?php $fromAccountList=CHtml::listData(Yii::app()->user->data()->userAccounts, 'account_id', 'account.account'); ?>
-	<?php $accountList=CHtml::listData(Account::model()->findAll(), 'id', 'account'); ?>
+	<?php $accountList=CHtml::listData(Account::model()->findAll(array('order'=>'account ASC')), 'id', 'account'); ?>
 	From Account: <?php echo $form->dropDownList($model,'from_account_id', $accountList, array(/*'class'=>'input-xlarge'*/)); ?>
 	<br/>
 	To Account: <?php echo $form->dropDownList($model,'to_account_id', $accountList, array(/*'class'=>'input-xlarge'*/)); ?>
 	<br/>
-	<?php $kasList=CHtml::listData(Kas::model()->findAll(), 'id', 'kas'); ?>
+	<?php $kasList=CHtml::listData(Kas::model()->findAll(array('order'=>'kas ASC')), 'id', 'kas'); ?>
 	From Kas: <?php echo $form->dropDownList($model,'from_kas_id', $kasList, array(/*'class'=>'input-xlarge'*/)); ?>
 	<br/>
 	To Kas: <?php echo $form->dropDownList($model,'to_kas_id', $kasList, array(/*'class'=>'input-xlarge'*/)); ?>

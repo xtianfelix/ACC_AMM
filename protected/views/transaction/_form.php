@@ -85,7 +85,7 @@ $form=$this->beginWidget('CActiveForm', array(
 	</div>
 
 	<div class="row">
-		<?php $kasList=CHtml::listData(Kas::model()->findAll(), 'id', 'kas'); ?>
+		<?php $kasList=CHtml::listData(Kas::model()->findAll(array('order'=>'kas ASC')), 'id', 'kas'); ?>
 		<?php echo $form->labelEx($model,'kas_id'); ?>
 		<?php echo $form->dropDownList($model,'kas_id', $kasList, array(/*'class'=>'input-xlarge'*/)); ?>
 		<?php echo $form->error($model,'kas_id'); ?>

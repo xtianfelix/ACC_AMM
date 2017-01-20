@@ -83,8 +83,8 @@
 			    viewMode: "days", 
 			    minViewMode: "days"
 			}).on('changeDate', function(ev){
-			    var newDate = new Date(ev.date)
-			    newDate.setDate(newDate.getDate());
+			    var newDate = new Date(ev.date);
+			    newDate = moment(newDate).add(7, 'day').toDate();
 			    dp4.setValue(newDate);
 				$('.dp1').datepicker('hide');
 				if($(".startRange1").val() > $(".endRange1").val()){
@@ -102,9 +102,10 @@
 			    viewMode: "months", 
 			    minViewMode: "months"
 			}).on('changeDate', function(ev){
-			    var newDate = new Date(ev.date)
-			    newDate.setDate(newDate.getDate());
-			    dp5.setValue(newDate);
+			    var newDate = new Date(ev.date);
+			    newDate = moment(newDate);
+			    dp2.setValue(newDate.startOf('month').toDate());
+			    dp5.setValue(newDate.endOf('month').toDate());
 				$('.dp2').datepicker('hide');
 				if($(".startRange2").val() > $(".endRange2").val()){
 					$('.endError2').show();
@@ -121,8 +122,10 @@
 			    viewMode: "years", 
 			    minViewMode: "years"
 			}).on('changeDate', function(ev){
-			    var newDate = new Date(ev.date)
-			    newDate.setDate(newDate.getDate());
+			    var newDate = new Date(ev.date);
+			    newDate = moment(newDate);
+			    dp2.setValue(newDate.startOf('year').toDate());
+			    dp5.setValue(newDate.endOf('year').toDate());
 			    dp6.setValue(newDate);
 				$('.dp3').datepicker('hide');
 				if($(".startRange3").val() > $(".endRange3").val()){

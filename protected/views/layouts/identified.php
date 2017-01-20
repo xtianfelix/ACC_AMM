@@ -29,6 +29,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
     <script type='text/javascript' src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery/jquery.js"></script>
     <script type='text/javascript' src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery/jquery.tablesorter.min.js"></script>
 	<script type='text/javascript' src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js"></script>
+	<script type='text/javascript' src="<?php echo Yii::app()->request->baseUrl; ?>/js/moment.min.js"></script>
     <script type='text/javascript' src="<?php echo Yii::app()->request->baseUrl; ?>/js/app.js"></script>
     <script type='text/javascript' src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     <script type='text/javascript' src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery/jquery.autoNumeric.js"></script>

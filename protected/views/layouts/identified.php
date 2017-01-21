@@ -2,7 +2,6 @@
 
 header('X-Frame-Options: SAMEORIGIN');
 header('X-UA-Compatible: IE=edge,chrome=1');
-
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -124,6 +123,11 @@ header('X-UA-Compatible: IE=edge,chrome=1');
  		$('.input-number > input').attr('data-a-dec',',');
  		$('.input-number > input').attr('data-w-empty','zero');
  	}
+ 	var defaultValues={};
+ 	try{
+ 		defaultValues = JSON.parse('<?php echo Yii::app()->user->data()->profile->about; ?>');
+ 		if(!defaultValues) defaultValues = {};
+ 	}catch(e){}
 </script>
 </body>
 </html>

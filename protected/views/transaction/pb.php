@@ -145,5 +145,10 @@ $form=$this->beginWidget('CActiveForm', array(
 		}).on('changeDate', function(ev){
 				$('#dp3').datepicker('hide');
 		});
+
+		if(!!defaultValues.kas){
+			$('#FormModelPb_from_kas_id').val(defaultValues.kas.toString());
+			$('#FormModelPb_to_kas_id').val(defaultValues.kas.toString());
+		}
 	}); 
 </script>
